@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "corotine.h"
+#include "coroutine.h"
 
 void test_func(void* arg) {
     printf("2. yield\n");

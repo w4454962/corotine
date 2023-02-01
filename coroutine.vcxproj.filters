@@ -24,7 +24,7 @@
     <ClCompile Include="3rd\libcoro\coro.c">
       <Filter>libcoco</Filter>
     </ClCompile>
-    <ClCompile Include="src\corotine.c">
+    <ClCompile Include="src\coroutine.c">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -32,7 +32,7 @@
     <ClInclude Include="3rd\libcoro\coro.h">
       <Filter>libcoco</Filter>
     </ClInclude>
-    <ClInclude Include="src\corotine.h">
+    <ClInclude Include="src\coroutine.h">
       <Filter>源文件</Filter>
     </ClInclude>
     <ClInclude Include="src\cvector.h">
