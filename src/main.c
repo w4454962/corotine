@@ -17,7 +17,7 @@ void __stdcall print(size_t index) {
     printf(messages[index - 1]);
 }
 
-void test_func(void* arg) {
+void CORO_API test_func(void* arg) {
     print(2);
   
     coro_yield(coro_current());
@@ -45,7 +45,7 @@ void test() {
 }
 #if WIN32
 
-void test_asm_func(void* arg) {
+void CORO_API test_asm_func(void* arg) {
     __asm {
      
         push 2
@@ -55,7 +55,6 @@ void test_asm_func(void* arg) {
 
         push eax 
         call coro_yield
-        add esp, 4 
 
         push 4
         call print
@@ -75,32 +74,27 @@ void test_asm() {
         push 0
         push test_asm_func
         call new_coro
-        add esp, 0x8
         mov esi, eax 
 
-        push esi
+        push esi 
         call coro_resume 
-        add esp, 4 
 
         push 3
         call print
 
         push esi
         call coro_resume
-        add esp, 4 
 
         push 5
         call print
 
-
-        push esi 
+        push esi
         call coro_free
-        add esp, 4
 
         push 6
         call print
 
-        pop esi 
+        pop esi
     }
 }
 

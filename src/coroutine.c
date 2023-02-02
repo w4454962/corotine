@@ -21,7 +21,7 @@ void coro_run(void* ptr) {
     coro_yield(coro);
 }
 
-struct coro_t* new_coro(coro_func func, void* arg) {
+struct coro_t* CORO_API new_coro(coro_func_t func, void* arg) {
     struct coro_t* coro = (struct coro_t*)malloc(sizeof(struct coro_t));
 
     coro->func = func;
@@ -41,7 +41,7 @@ struct coro_t* new_coro(coro_func func, void* arg) {
     return coro;
 }
 
-void coro_resume(struct coro_t* coro) {
+void CORO_API coro_resume(struct coro_t* coro) {
     struct coro_context_t* context = coro->context;
 
     cvector_push_back(fiber_pool, coro);
@@ -49,7 +49,7 @@ void coro_resume(struct coro_t* coro) {
     coro_transfer(&context->mainctx, &context->ctx);
 }
 
-void coro_yield(struct coro_t* coro) {
+void CORO_API coro_yield(struct coro_t* coro) {
     struct coro_context_t* context = coro->context;
 
     cvector_pop_back(fiber_pool);
@@ -57,7 +57,7 @@ void coro_yield(struct coro_t* coro) {
     coro_transfer(&context->ctx, &context->mainctx);
 }
 
-void coro_free(struct coro_t* coro) {
+void CORO_API coro_free(struct coro_t* coro) {
     struct coro_context_t* context = coro->context;
 
     coro_stack_free(&context->stack);
@@ -69,7 +69,7 @@ void coro_free(struct coro_t* coro) {
     free(coro);
 }
 
-struct coro_t* coro_current() {
+struct coro_t* CORO_API coro_current() {
     size_t size = cvector_size(fiber_pool);
 
     if (size) {
