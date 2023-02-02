@@ -13,7 +13,7 @@ const char* messages[] = {
 };
 
 
-void __stdcall print(size_t index) {
+void CORO_API print(size_t index) {
     printf(messages[index - 1]);
 }
 
@@ -48,7 +48,7 @@ void test() {
 void CORO_API test_asm_func(void* arg) {
     __asm {
      
-        push 2
+        mov ecx, 2
         call print
 
         call coro_current
@@ -56,7 +56,7 @@ void CORO_API test_asm_func(void* arg) {
         mov ecx, eax  
         call coro_yield
 
-        push 4
+        mov ecx, 4
         call print
 
     }
@@ -66,7 +66,7 @@ void test_asm() {
     printf("test asm\n");
 
     __asm {
-        push 1
+        mov ecx, 1
         call print
 
         push esi 
@@ -79,26 +79,26 @@ void test_asm() {
         mov ecx, esi 
         call coro_resume 
 
-        push 3
+        mov ecx, 3
         call print
 
         mov ecx, esi
         call coro_resume
 
-        push 5
+        mov ecx, 5
         call print
 
         mov ecx, esi 
         call coro_free
 
-        push 6
+        mov ecx, 6
         call print
 
         pop esi
     }
 }
-
 #endif
+
 
 int main() {
     test();
