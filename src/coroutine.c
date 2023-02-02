@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include "libcoro/coro.h"
 
-_declspec(thread) cvector_vector_type(struct coro_t*) fiber_pool = NULL;
+_declspec(thread) static cvector_vector_type(struct coro_t*) fiber_pool = NULL;
 
 struct coro_context_t {
     coro_context ctx, mainctx;
@@ -13,7 +13,7 @@ struct coro_context_t {
 };
 
 
-void coro_run(void* ptr) {
+static void coro_run(void* ptr) {
     struct coro_t* coro = (struct coro_t*)ptr;
 
     coro->func(coro->arg);
