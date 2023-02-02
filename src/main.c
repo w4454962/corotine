@@ -53,7 +53,7 @@ void CORO_API test_asm_func(void* arg) {
 
         call coro_current
 
-        push eax 
+        mov ecx, eax  
         call coro_yield
 
         push 4
@@ -71,24 +71,24 @@ void test_asm() {
 
         push esi 
 
-        push 0
-        push test_asm_func
+        mov edx, 0
+        mov ecx, test_asm_func
         call new_coro
         mov esi, eax 
 
-        push esi 
+        mov ecx, esi 
         call coro_resume 
 
         push 3
         call print
 
-        push esi
+        mov ecx, esi
         call coro_resume
 
         push 5
         call print
 
-        push esi
+        mov ecx, esi 
         call coro_free
 
         push 6

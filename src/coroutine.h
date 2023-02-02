@@ -1,6 +1,6 @@
 #pragma once
 
-#define CORO_API __stdcall 
+#define CORO_API __fastcall 
 
 typedef void (CORO_API *coro_func_t)(void*);
 
