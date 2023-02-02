@@ -43,7 +43,7 @@ void test() {
 
     print(6);
 }
-
+#if WIN32
 
 void test_asm_func(void* arg) {
     __asm {
@@ -103,12 +103,16 @@ void test_asm() {
         pop esi 
     }
 }
+
+#endif
+
 int main() {
     test();
-
+#if WIN32
     printf("\n\n");
 
     test_asm();
+#endif
 
     return 0;
 }
